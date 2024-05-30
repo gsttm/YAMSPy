@@ -2592,3 +2592,9 @@ class MSPy:
         
     def process_MSP_SET_RTC(self, data):
         logging.info('Real time clock set')
+
+    def send_MSP_SET_SERVO_CONFIGURATION(self):
+        data = struct.pack('>BHHHBBL', 0,1000, 2000, 1500, 100, 6, 0)
+        if self.send_RAW_msg(MSPy.MSPCodes['MSP_SET_SERVO_CONFIGURATION'], data):
+            dataHandler = self.receive_msg()
+            self.process_recv_data(dataHandler)
